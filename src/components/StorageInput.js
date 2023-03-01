@@ -13,7 +13,7 @@ export const StorageInput = (props) => {
                 maxValue={1000}
                 minValue={0}
                 value={props.storageCount}
-                onChange={e=>{props.setStorageCount(e); props.firstChange(); props.secondChange(); props.thirdChange(); props.fourthChange()}}/>
+                onChange={e=>{props.setStorageCount(e)}}/>
         </div>
     )
 }

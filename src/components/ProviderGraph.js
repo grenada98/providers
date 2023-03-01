@@ -14,7 +14,9 @@ export const ProviderGraph = (props) => {
 
     const [option2, setOption2] = useState(null);
     const [option3, setOption3] = useState(null);
-
+    useEffect(()=>{
+        firstChange(); secondChange(); thirdChange(); fourthChange()
+    }, [firstCount, secondCount, thirdCount, fourthCount, storageCount, transferCount])
     useEffect(()=>{
         firstChange();
         secondChange();
@@ -114,17 +116,17 @@ export const ProviderGraph = (props) => {
       }
     function secondChange(){
         if(option2){
-        const resultStorage = data[1]['storage-option'].find((item) => item.option === option2);
-        const priceStorage = resultStorage?.price;
-        const resultTransfer = data[1]['transfer-option'].find((item) => item.option === option2);
-        const priceTransfer = resultTransfer?.price;
-        let i = storageCount * priceStorage + transferCount*priceTransfer;
-        if(i > data[1].max){
-            setSecondCount(data[1].max)
-        }
-        else{
-            setSecondCount(i)
-        }
+            const resultStorage = data[1]['storage-option'].find((item) => item.option === option2);
+            const priceStorage = resultStorage?.price;
+            const resultTransfer = data[1]['transfer-option'].find((item) => item.option === option2);
+            const priceTransfer = resultTransfer?.price;
+            let i = storageCount * priceStorage + transferCount*priceTransfer;
+            if(i > data[1].max){
+                setSecondCount(data[1].max)
+            }
+            else{
+                setSecondCount(i)
+            }
         }
         else{
             setSecondCount(0)
@@ -132,17 +134,18 @@ export const ProviderGraph = (props) => {
     }
     function thirdChange(){
         if(option3){
-        const resultStorage = data[2]['storage-option'].find((item) => item.option === option3);
-        const priceStorage = resultStorage?.price;
-        const resultTransfer = data[2]['transfer-option'].find((item) => item.option === option3);
-        const priceTransfer = resultTransfer?.price;
-        let i = (storageCount - resultStorage.free) * priceStorage + (transferCount - resultTransfer.free) * priceTransfer;
-        if(i < 0){
-            setThirdCount(0);
+            const resultStorage = data[2]['storage-option'].find((item) => item.option === option3);
+            const priceStorage = resultStorage?.price;
+            const resultTransfer = data[2]['transfer-option'].find((item) => item.option === option3);
+            const priceTransfer = resultTransfer?.price;
+            let i = (storageCount - resultStorage.free) * priceStorage + (transferCount - resultTransfer.free) * priceTransfer;
+            if(i < 0){
+                setThirdCount(0);
+            }
+            else{
+                setThirdCount(i);
+            }
         }
-        else{
-            setThirdCount(i);
-        }}
         else{
             setThirdCount(0);
         }

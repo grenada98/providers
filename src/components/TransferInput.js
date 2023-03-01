@@ -14,7 +14,7 @@ export const TransferInput = (props) => {
                 maxValue={1000}
                 minValue={0}
                 value={props.transferCount}
-                onChange={e=>{props.setTransferCount(e); props.firstChange(); props.secondChange(); props.thirdChange(); props.fourthChange()}}/>
+                onChange={e=>{props.setTransferCount(e)}}/>
         </div>
     )
 }
