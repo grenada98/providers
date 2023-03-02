@@ -20,7 +20,6 @@ export const ProviderGraph = (props) => {
     }, [])
     useEffect(()=>{
         firstChange(); secondChange(); thirdChange(); fourthChange(); setFindMin(findMinArray());
-        console.log(findMind)
     }, [firstCount, secondCount, thirdCount, fourthCount, storageCount, transferCount])
     useEffect(()=>{
         firstChange();
@@ -38,7 +37,6 @@ export const ProviderGraph = (props) => {
                 min = arrayMin[i]
             }
         }
-        console.log("min " + min);
         return min;
     }
     useEffect(() => {
