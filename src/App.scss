@@ -110,6 +110,7 @@ body{
     border-radius: 5px;
     border: 1px solid black;
     padding: 5px;
+    max-width: 100px;
     @media (max-width: 600px){
       order: 0;
     }
@@ -120,9 +121,6 @@ body{
   }
 }
 
-.graphic{
-  height: 100px;
-}
 .graph{
   border: 2px solid black;
   width: 50%;
@@ -135,13 +133,13 @@ body{
     order: 0;
     flex-direction: row;
     align-items: flex-end;
-    height: 200px;
+    height: 100px;
     width: 100%;
   }
-  .blue,
-  .green,
-  .yellow,
-  .orange{
+  .red,
+  .orange,
+  .violet,
+  .blue{
     height: 50px;
     position: relative;
     border: 1px solid black;
@@ -162,17 +160,5 @@ body{
         font-size: 16px;
       }
     }
-  }
-  .blue{
-    background-color: blue;
-  }
-  .green{
-    background-color: green;
-  }
-  .yellow{
-    background-color: yellow;
-  }
-  .orange{
-    background-color: orange;
   }
 }

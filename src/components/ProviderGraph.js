@@ -11,19 +11,36 @@ export const ProviderGraph = (props) => {
     const [storageCount, setStorageCount] = useState(0);
     const [transferCount, setTransferCount] = useState(0);
     const [styleBlock, setStyleBlock] = useState("width");
+    const [findMind, setFindMin] = useState(null);
 
     const [option2, setOption2] = useState(null);
     const [option3, setOption3] = useState(null);
     useEffect(()=>{
-        firstChange(); secondChange(); thirdChange(); fourthChange()
+        setFindMin(findMinArray())
+    }, [])
+    useEffect(()=>{
+        firstChange(); secondChange(); thirdChange(); fourthChange(); setFindMin(findMinArray());
+        console.log(findMind)
     }, [firstCount, secondCount, thirdCount, fourthCount, storageCount, transferCount])
     useEffect(()=>{
         firstChange();
         secondChange();
         thirdChange();
         fourthChange();
+        setFindMin(findMinArray());
     },[option2, option3])
 
+    function findMinArray(){
+        const arrayMin = [firstCount, secondCount, thirdCount, fourthCount];
+        let min = arrayMin[0];
+        for(let i = 0; i<arrayMin.length; i++){
+            if(min > arrayMin[i]){
+                min = arrayMin[i]
+            }
+        }
+        console.log("min " + min);
+        return min;
+    }
     useEffect(() => {
         function handleResize() {
           if (window.innerWidth < 600) {
@@ -46,7 +63,8 @@ export const ProviderGraph = (props) => {
             storage: 0.005,
             transfer: 0.01,
             min: 7,
-            img: process.env.PUBLIC_URL + "/img/backblaze.png"
+            img: process.env.PUBLIC_URL + "/img/backblaze.png",
+            color: "red"
         },
         {
             name: "bunny.net",
@@ -71,7 +89,8 @@ export const ProviderGraph = (props) => {
                 },
             ],
             max: 10,
-            img: process.env.PUBLIC_URL + "/img/bunnynet.svg"
+            img: process.env.PUBLIC_URL + "/img/bunnynet.svg",
+            color: "orange"
         },
         {
             name: "scaleway.com",
@@ -95,14 +114,16 @@ export const ProviderGraph = (props) => {
                         price: 0.02
                     }
             ],
-            img: process.env.PUBLIC_URL + "/img/scaleway.svg"
+            img: process.env.PUBLIC_URL + "/img/scaleway.svg",
+            color: "violet"
         },
         {
             name: "vultr.com",
             min: 5,
             storage: 0.01,
             transfer: 0.01,
-            img: process.env.PUBLIC_URL + "/img/vultr.svg"
+            img: process.env.PUBLIC_URL + "/img/vultr.svg",
+            color: "blue"
         }
     ]
     function firstChange(){
@@ -180,16 +201,19 @@ export const ProviderGraph = (props) => {
                 fourthChange={fourthChange}/>
             </div>
             <div className='provider-graph__wrapper'>
+                <div className='provider-graph__mobile'>
+                    <div className='provider-graph__color '></div>
+                </div>
                 <div className='provider__wrapper'>
                     {data.map((item, index) =>(
                         <Provider key={index} index={index} item={item} secondChange={secondChange} thirdChange={thirdChange} fourthChange={fourthChange} setOption2={setOption2} setOption3={setOption3}/>
                     ))}
                 </div>
                 <div className="graph">
-                    <div className="blue" style={{[styleBlock]:firstCount}}><div className='count'>{firstCount.toFixed(2)}$</div></div>
-                    <div className="green" style={{[styleBlock]:secondCount}}><div className='count'>{secondCount.toFixed(2)}$</div></div>
-                    <div className="yellow" style={{[styleBlock]:thirdCount}}><div className='count'>{thirdCount.toFixed(2)}$</div></div>
-                    <div className="orange" style={{[styleBlock]:fourthCount}}><div className='count'>{fourthCount.toFixed(2)}$</div></div>
+                    <div className="red" style={{[styleBlock]:firstCount, backgroundColor: findMind===firstCount? "red": "gray"}}><div className='count'>{firstCount.toFixed(2)}$</div></div>
+                    <div className="orange" style={{[styleBlock]:secondCount, backgroundColor: findMind===secondCount? "orange": "gray"}}><div className='count'>{secondCount.toFixed(2)}$</div></div>
+                    <div className="violet" style={{[styleBlock]:thirdCount, backgroundColor: findMind===thirdCount? "violet": "gray"}}><div className='count'>{thirdCount.toFixed(2)}$</div></div>
+                    <div className="blue" style={{[styleBlock]:fourthCount, backgroundColor: findMind===fourthCount? "blue": "gray"}}><div className='count'>{fourthCount.toFixed(2)}$</div></div>
                 </div>
             </div>
         </div>
