@@ -10,8 +10,10 @@ export const ProviderGraph = (props) => {
     const [fourthCount, setFourthCount] = useState(0);
     const [storageCount, setStorageCount] = useState(0);
     const [transferCount, setTransferCount] = useState(0);
-    const [styleBlock, setStyleBlock] = useState("width");
+    //const [styleBlock, setStyleBlock] = useState("width");
     const [findMind, setFindMin] = useState(null);
+
+    const [isSmallScreen, setIsSmallScreen] = useState(null);
 
     const [option2, setOption2] = useState(null);
     const [option3, setOption3] = useState(null);
@@ -39,7 +41,16 @@ export const ProviderGraph = (props) => {
         }
         return min;
     }
-    useEffect(() => {
+    useEffect(()=>{
+        const mediaQuery = window.matchMedia('(max-width: 600px)');
+        if(mediaQuery.matches){
+            setIsSmallScreen("height")
+        }
+        else{
+            setIsSmallScreen("width")
+        }
+    }, [])
+    /*useEffect(() => {
         function handleResize() {
           if (window.innerWidth < 600) {
             setStyleBlock("height");
@@ -53,7 +64,7 @@ export const ProviderGraph = (props) => {
         return () => {
           window.removeEventListener("resize", handleResize);
         };
-      }, []);
+      }, []);*/
 
     const data = [
         {
@@ -208,10 +219,10 @@ export const ProviderGraph = (props) => {
                     ))}
                 </div>
                 <div className="graph">
-                    <div className="red" style={{[styleBlock]:firstCount, backgroundColor: findMind===firstCount? "red": "gray"}}><div className='count'>{firstCount.toFixed(2)}$</div></div>
-                    <div className="orange" style={{[styleBlock]:secondCount, backgroundColor: findMind===secondCount? "orange": "gray"}}><div className='count'>{secondCount.toFixed(2)}$</div></div>
-                    <div className="violet" style={{[styleBlock]:thirdCount, backgroundColor: findMind===thirdCount? "violet": "gray"}}><div className='count'>{thirdCount.toFixed(2)}$</div></div>
-                    <div className="blue" style={{[styleBlock]:fourthCount, backgroundColor: findMind===fourthCount? "blue": "gray"}}><div className='count'>{fourthCount.toFixed(2)}$</div></div>
+                    <div className="red" style={{[isSmallScreen]:firstCount, backgroundColor: findMind===firstCount? "red": "gray"}}><div className='count'>{firstCount.toFixed(2)}$</div></div>
+                    <div className="orange" style={{[isSmallScreen]:secondCount, backgroundColor: findMind===secondCount? "orange": "gray"}}><div className='count'>{secondCount.toFixed(2)}$</div></div>
+                    <div className="violet" style={{[isSmallScreen]:thirdCount, backgroundColor: findMind===thirdCount? "violet": "gray"}}><div className='count'>{thirdCount.toFixed(2)}$</div></div>
+                    <div className="blue" style={{[isSmallScreen]:fourthCount, backgroundColor: findMind===fourthCount? "blue": "gray"}}><div className='count'>{fourthCount.toFixed(2)}$</div></div>
                 </div>
             </div>
         </div>
